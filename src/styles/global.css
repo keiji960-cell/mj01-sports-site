@@ -246,6 +246,7 @@ p {
 
 .diagram svg text {
   font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
 }
 
 .diagram-legend {
