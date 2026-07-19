@@ -12,10 +12,17 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+const formattedDate = post.data.pubDate.toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 ---
 <Layout title={post.data.title} description={post.data.description}>
   <article>
+    <p class="article-meta">{post.data.category} · {formattedDate}</p>
     <h1>{post.data.title}</h1>
     <Content />
+    <p class="disclaimer">이 글은 구매 결정에 참고할 수 있는 일반 정보를 제공하며, 특정 브랜드·제품을 보증하지 않습니다.</p>
   </article>
 </Layout>

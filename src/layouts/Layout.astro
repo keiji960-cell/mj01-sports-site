@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 interface Props {
   title: string;
   description?: string;
@@ -11,17 +13,20 @@ const { title, description = "" } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
     <title>{title}</title>
   </head>
   <body>
-    <header>
+    <header class="site-header">
       <a href="/">스포츠·홈트 용품 리뷰</a>
     </header>
-    <main>
+    <main class="site-container">
       <slot />
     </main>
-    <footer>
-      <p>&copy; {new Date().getFullYear()} MJ_01</p>
+    <footer class="site-footer">
+      <p>&copy; {new Date().getFullYear()} 스포츠·홈트 용품 리뷰</p>
     </footer>
   </body>
 </html>

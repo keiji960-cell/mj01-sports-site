@@ -5,15 +5,31 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('posts')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const groups = new Map<string, typeof posts>();
+for (const post of posts) {
+  const list = groups.get(post.data.category) ?? [];
+  list.push(post);
+  groups.set(post.data.category, list);
+}
 ---
 <Layout title="스포츠·홈트 용품 리뷰" description="러닝화, 홈트용품, 골프용품 등 실사용 비교·추천">
   <h1>스포츠·홈트 용품 리뷰</h1>
-  <ul>
-    {posts.map((post) => (
-      <li>
-        <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
-        <p>{post.data.description}</p>
-      </li>
-    ))}
-  </ul>
+  <p>운동 용품을 고를 때 헷갈리는 기준을 카테고리별로 정리합니다.</p>
+
+  {Array.from(groups.entries()).map(([category, categoryPosts]) => (
+    <section class="category-group">
+      <h2>{category}</h2>
+      <ul class="post-list">
+        {categoryPosts.map((post) => (
+          <li>
+            <a class="post-card" href={`/posts/${post.slug}/`}>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
 </Layout>
