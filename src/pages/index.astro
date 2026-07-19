@@ -18,15 +18,6 @@ const categoryHooks: Record<string, string> = {
   "실내유산소기구": "아랫집 눈치 안 보고 땀 흘리는 법. 층간소음 기준부터 짚고 고릅니다.",
 };
 
-const mosaic = [
-  { src: "/images/yoga-mats.jpg", alt: "요가매트", href: "/posts/yoga-mat-thickness-guide/" },
-  { src: "/images/exercise-bike.jpg", alt: "실내자전거", href: "/posts/exercise-bike-vs-stepper/" },
-  { src: "/images/kettlebells.jpg", alt: "케틀벨", href: "/posts/kettlebell-starting-weight-guide/" },
-  { src: "/images/jump-rope.jpg", alt: "줄넘기", href: "/posts/jump-rope-beginner-guide/" },
-  { src: "/images/foam-roller.jpg", alt: "폼롤러", href: "/posts/foam-roller-vs-massage-ball/" },
-  { src: "/images/hula-hoop.jpg", alt: "훌라후프", href: "/posts/hula-hoop-diet-guide/" },
-  { src: "/images/gym-ball.jpg", alt: "짐볼", href: "/posts/gym-ball-size-guide/" },
-];
 ---
 <Layout title="스포츠·홈트 용품 리뷰" description="러닝화, 홈트용품, 골프용품 등 실사용 비교·추천">
   <section class="hero">
@@ -40,13 +31,8 @@ const mosaic = [
         <li>쿠팡 판매 순위·상품평 수 기준 실제 상품 비교</li>
       </ul>
     </div>
-    <div class="hero-mosaic">
-      {mosaic.map((item) => (
-        <a href={item.href} title={item.alt}>
-          <img src={item.src} alt={item.alt} loading="eager" />
-        </a>
-      ))}
-      <p class="hero-credit">사진 출처는 각 게시글 하단에 표기되어 있습니다 (Wikimedia Commons).</p>
+    <div class="hero-visual">
+      <img src="/images/hero-illustration.png" alt="창가에 요가매트, 케틀벨, 저항밴드, 줄넘기가 놓인 아늑한 원룸 홈트 공간 일러스트" loading="eager" />
     </div>
   </section>
 
