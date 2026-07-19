@@ -12,14 +12,48 @@ for (const post of posts) {
   list.push(post);
   groups.set(post.data.category, list);
 }
+
+const categoryHooks: Record<string, string> = {
+  "홈트용품": "돌돌 말아서 서랍에 넣을 수 있는 것부터 — 매트·소도구는 여기서 시작하세요.",
+  "실내유산소기구": "아랫집 눈치 안 보고 땀 흘리는 법. 층간소음 기준부터 짚고 고릅니다.",
+};
+
+const mosaic = [
+  { src: "/images/yoga-mats.jpg", alt: "요가매트", href: "/posts/yoga-mat-thickness-guide/" },
+  { src: "/images/exercise-bike.jpg", alt: "실내자전거", href: "/posts/exercise-bike-vs-stepper/" },
+  { src: "/images/kettlebells.jpg", alt: "케틀벨", href: "/posts/kettlebell-starting-weight-guide/" },
+  { src: "/images/jump-rope.jpg", alt: "줄넘기", href: "/posts/jump-rope-beginner-guide/" },
+  { src: "/images/foam-roller.jpg", alt: "폼롤러", href: "/posts/foam-roller-vs-massage-ball/" },
+  { src: "/images/hula-hoop.jpg", alt: "훌라후프", href: "/posts/hula-hoop-diet-guide/" },
+  { src: "/images/gym-ball.jpg", alt: "짐볼", href: "/posts/gym-ball-size-guide/" },
+];
 ---
 <Layout title="스포츠·홈트 용품 리뷰" description="러닝화, 홈트용품, 골프용품 등 실사용 비교·추천">
-  <h1>스포츠·홈트 용품 리뷰</h1>
-  <p>운동 용품을 고를 때 헷갈리는 기준을 카테고리별로 정리합니다.</p>
+  <section class="hero">
+    <div>
+      <p class="hero-eyebrow">근거 있는 원룸 홈트 가이드</p>
+      <h1>아랫집 눈치 안 보고, 좁은 방에서도 되는 운동 용품 고르기</h1>
+      <p class="hero-sub">"다들 좋다길래"가 아니라, 국토교통부 층간소음 기준·임상 연구·실제 판매 데이터를 직접 확인하고 씁니다. 광고 없이 있는 그대로 비교합니다.</p>
+      <ul class="hero-facts">
+        <li>국토교통부 고시 경량·중량충격음 기준으로 층간소음 비교</li>
+        <li>연구·코칭 가이드라인 등 실제 출처를 밝히고 인용</li>
+        <li>쿠팡 판매 순위·상품평 수 기준 실제 상품 비교</li>
+      </ul>
+    </div>
+    <div class="hero-mosaic">
+      {mosaic.map((item) => (
+        <a href={item.href} title={item.alt}>
+          <img src={item.src} alt={item.alt} loading="eager" />
+        </a>
+      ))}
+      <p class="hero-credit">사진 출처는 각 게시글 하단에 표기되어 있습니다 (Wikimedia Commons).</p>
+    </div>
+  </section>
 
   {Array.from(groups.entries()).map(([category, categoryPosts]) => (
     <section class="category-group">
       <h2>{category}</h2>
+      {categoryHooks[category] && <p class="category-hook">{categoryHooks[category]}</p>}
       <ul class="post-list">
         {categoryPosts.map((post) => (
           <li>
